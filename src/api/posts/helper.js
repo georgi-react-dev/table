@@ -3,7 +3,7 @@ export const transformPosts = (posts, users) => {
       const user = users.filter((user) => user.id === post.userId)[0];
       const newPost = { ...post, link: [user?.name, `/user/${post.userId}`] };
 
-      console.log("newPost", newPost);
+      //console.log("newPost", newPost);
       return newPost;
     });
   };

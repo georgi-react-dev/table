@@ -1,31 +1,35 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import usePosts from "../../hooks/usePosts";
 import useUsers from "../../hooks/useUsers";
 import TableFilter from "../../components/TableFilter/TableFilter";
-import { Link } from "react-router-dom";
 import GenericTable from "../../components/GenericTable.js/GenericTable";
 import { transformPosts } from "../../api/posts/helper";
+import Modal from "../Modal/Modal";
 
 function Posts() {
   const { posts, getPostsByUserId } = usePosts();
   const { users } = useUsers();
+  const [show, setShow] = useState(false)
+  const [postId, setPostId] = useState(null)
 
   const onSelectItem = (id) => {
     getPostsByUserId(id);
   };
   const onClick = (postId) => {
-    // showModal(true);
-    alert(postId);
-  }
+    setPostId(postId);
+    setShow(true);
+    // alert(postId);
+  };
   if (!posts) {
     return <h1>Loading ...</h1>;
   }
 
   const theadColumns = ["Title", "Author", "Description"];
-  const tbodyPropsFields = ["title", "link", "body", ];
+  const tbodyPropsFields = ["title", "link", "body"];
 
   return (
     <section>
+      <Modal show={show} id={postId} closeModal={() => setShow(false)}/>
       {posts && users && (
         <GenericTable
           tableName={`Posts`}
@@ -46,6 +50,7 @@ function Posts() {
           </div>
         </GenericTable>
       )}
+      
     </section>
   );
 }

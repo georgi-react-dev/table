@@ -9,14 +9,14 @@ import UserPosts from "../../../components/Users/UserPosts";
 function SingleUser() {
   let params = useParams();
   const [user, setUser] = useState();
-  console.log("params", params.userId);
+ // console.log("params", params.userId);
   const [userImage, setUserImage] = useState()
   useEffect(() => {
     const getUser = async () => {
       setUser(await fetchUser(params.userId));
       const results = await fetch(`https://randomuser.me/api/`);
       const data = await results.json();
-      console.log("USER IMAGE", data.results[0].picture);
+      //("USER IMAGE", data.results[0].picture);
       // return data;
       setUserImage(data.results[0].picture.large);
 

@@ -8,8 +8,8 @@ function GenericTable({
   children,
   onClick,
 }) {
-  console.log("theadColumns", theadColumns);
-  console.log("tbodyProps", tbodyProps);
+  // console.log("theadColumns", theadColumns);
+  // console.log("tbodyProps", tbodyProps);
   return (
     <div >
       <h1 style={{margin:'2rem 0'}}>{tableName}</h1>
@@ -25,7 +25,7 @@ function GenericTable({
         <tbody>
           {tbodyProps &&
             tbodyProps?.map((tbodyProp, index) => {
-              console.log("tbodyProps", tbodyProp);
+              //console.log("tbodyProps", tbodyProp);
               return (
                 <tr key={tbodyProp?.id} onClick={() => onClick(tbodyProp?.id)}>
                   {tbodyPropsFields?.map((tbodyPropsField) => {
