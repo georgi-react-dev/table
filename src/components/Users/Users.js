@@ -29,13 +29,15 @@ function Users() {
   const { users } = useUsers();
   return (
     <section>
+      
       <GenericTable
         tableName={`Users`}
         theadColumns={theadColumns}
         tbodyProps={transformUsers(users)}
         tbodyPropsFields={tbodyPropsFields}
       >
-          <div className="filter-and-pagination hasFilter">
+          <div className="filter-and-pagination has-filter">
+          <button className="btn btn-primary">Add new user</button>
             {/* {users.length && (
               <TableFilter
                 items={users}
