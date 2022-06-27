@@ -3,7 +3,6 @@ import { Routes, Route, useParams } from "react-router-dom";
 import { fetchUser } from "../../../api/users";
 import classes from "./SingleUser.module.css";
 import { FaPhone, FaEnvelope, FaLocationArrow } from "react-icons/fa";
-import GoogleMap from "../../../components/GoogleMap/GoogleMap";
 import UserPosts from "../../../components/Users/UserPosts";
 
 function SingleUser() {
@@ -64,7 +63,6 @@ function SingleUser() {
           </div>
         </div>
         <div className={classes.map}>
-            {/* <GoogleMap/> */}
         </div>
       </div>
       
