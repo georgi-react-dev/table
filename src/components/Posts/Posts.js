@@ -9,29 +9,29 @@ import Comments from "../Comments/Comments";
 import GenericModal from "../Modal/GenericModal";
 
 function Posts({ userId }) {
-  const { posts, getPostsByUserId } = usePosts();
+  const { posts, getPostsByUserId } = usePosts(userId);
   const { users } = useUsers();
   const [show, setShow] = useState(false);
   const [postId, setPostId] = useState(null);
   const [data, setData] = useState([]);
   const [postComments, setPostComments] = useState(null);
-
-  useEffect(() => {
-    if (userId) {
-      getPostsByUserId(userId);
-    }
-  }, [userId]);
+  console.log("INITIAL POSTS 1", posts);
+  // useEffect(() => {
+  //   if (userId) {
+  //     getPostsByUserId(userId);
+  //   }
+  // }, [userId]);
   useEffect(() => {
     const fetchData = async () => {
-      if(postId) {
+      if (postId) {
         const post = await fetchPostById(postId);
         setData(post);
-  
+
         const comments = await fetchCommentsByPostId(postId);
         console.log(comments);
         // setPost(comments);
         setPostComments(comments);
-  
+
         setShow(true);
       }
     };
@@ -44,6 +44,7 @@ function Posts({ userId }) {
   const onClick = async (postId) => {
     setPostId(postId);
   };
+  console.log("INITIAL POSTS", posts);
   if (!posts) {
     return <h1>Loading ...</h1>;
   }
@@ -52,53 +53,63 @@ function Posts({ userId }) {
   const tbodyPropsFields = ["title", "link", "body"];
 
   return (
-    <section>
-      {show}
-      {/* <Modal show={show} id={postId} closeModal={() => setShow(false)}/> */}
-      {show && (
-        <GenericModal
-          show={show}
-          data={data}
-          closeModal={() => setShow(false)}
-          buttons={<><button
-            type="button"
-            className="btn btn-secondary"
-            data-dismiss="modal"
-            onClick={() => setShow(false)}
-          >
-            Close
-          </button>
-          <button type="button" className="btn btn-primary">
-            Save changes
-          </button></>}
-        >
-          <Comments data={postComments} />
-        </GenericModal>
-      )}
-      {posts && users && (
-        <GenericTable
-          tableName={`Posts`}
-          theadColumns={theadColumns}
-          tbodyProps={transformPosts(posts, users)}
-          tbodyPropsFields={tbodyPropsFields}
-          onClick={onClick}
-        >
-          {userId}
-          <div
-            className={`filter-and-pagination ${!userId ? 'has-filter' : null}`}
-          >
-            {users.length && !userId && (
-              <TableFilter
-                items={users}
-                label="Users"
-                selectItem={onSelectItem}
-              />
-            )}
-            <div>Total: {posts.length}</div>
-          </div>
-        </GenericTable>
-      )}
-    </section>
+    <>
+      {posts.length ? (
+        <section>
+          {show && (
+            <GenericModal
+              show={show}
+              title={data.title}
+              body={data.body}
+              data={data}
+              closeModal={() => setShow(false)}
+              buttons={
+                <>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                    onClick={() => setShow(false)}
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-primary">
+                    Save changes
+                  </button>
+                </>
+              }
+            >
+              <Comments data={postComments} />
+            </GenericModal>
+          )}
+
+          {posts.length && users.length && (
+            <GenericTable
+              tableName={`Posts`}
+              theadColumns={theadColumns}
+              tbodyProps={transformPosts(posts, users)}
+              tbodyPropsFields={tbodyPropsFields}
+              onClick={onClick}
+            >
+              <div
+                className={`filter-and-pagination ${
+                  !userId ? "has-filter" : null
+                }`}
+              >
+                {users.length && !userId && (
+                  <TableFilter
+                    items={users}
+                    label="Users"
+                    selectItem={onSelectItem}
+                  />
+                )}
+                <div>Total: {posts.length}</div>
+              </div>
+            </GenericTable>
+          )}
+        </section>
+      ) : null}
+    </>
   );
 }
 

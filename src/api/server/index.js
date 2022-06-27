@@ -9,10 +9,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use('/api/users', require('./routes/usersRoutes'))
+app.use('/api/users/:id', require('./routes/usersRoutes'))
 app.use('/api/names', require('./routes/namesRoutes'))
 
 
-const name = new Name({name: 'Georgi'})
-name.save().then(() => console.log('Name saved'));
+// const name = new Name({name: 'Georgi'})
+// name.save().then(() => console.log('Name saved'));
 
 app.listen(port, () => console.log(`SERVER START on port ${port}`))

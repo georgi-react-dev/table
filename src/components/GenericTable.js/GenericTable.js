@@ -31,14 +31,14 @@ function GenericTable({
                   {tbodyPropsFields?.map((tbodyPropsField) => {
                     if (tbodyPropsField === "link") {
                       return (
-                        <td>
+                        <td key={tbodyPropsField}>
                           <Link to={tbodyProp[tbodyPropsField][1]}>
                             {tbodyProp[tbodyPropsField][0]}
                           </Link>
                         </td>
                       );
                     }
-                    return <td>{tbodyProp[tbodyPropsField]}</td>;
+                    return <td key={tbodyPropsField}>{tbodyProp[tbodyPropsField]}</td>;
                   })}
 
                   {/* <td>{props?.authorLink && <Link to={props.authorLink}>{props.author}</Link>}</td>

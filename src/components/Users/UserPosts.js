@@ -8,7 +8,7 @@ import GenericModal from "../Modal/GenericModal";
 
 function UserPosts({ userId }) {
   return (
-    <div>
+    <div data-test="test">
       <Posts userId={userId}/>
     </div>
   );

@@ -10,7 +10,7 @@ export async function fetchPostsByUserId(id) {
     `https://jsonplaceholder.typicode.com/posts?userId=${id}`
   );
   const data = await results.json();
-  console.log("POSTS BY USER ID", data);
+  console.log("jsonplaceholder POSTS BY USER ID", data);
   return data;
 }
 

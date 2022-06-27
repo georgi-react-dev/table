@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import classes from "./Modal.module.css";
 import { FaTimesCircle } from "react-icons/fa";
 
-const GenericModal = ({ show, closeModal, title, children, data, buttons }) => {
-  console.log("TITLE ", data.title);
+const GenericModal = ({ show, closeModal, title,body, children, data, buttons }) => {
+  console.log("TITLE ", title);
 
 //   useEffect(() => {
         
@@ -25,7 +25,7 @@ const GenericModal = ({ show, closeModal, title, children, data, buttons }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className={classes.modalHeader}>
-              <h2>{data.title}</h2>
+              <h2>{title}</h2>
               <button
                 type="button"
                 className={classes.closeBtn}
@@ -37,13 +37,13 @@ const GenericModal = ({ show, closeModal, title, children, data, buttons }) => {
               </button>
             </div>
             <div className={classes.modalBody}>
-              {data.body}
+              {body}
               <br></br>
               <hr></hr>
               {children}
             </div>
 
-            <div className={classes.modalFooter}>{buttons}</div>
+            {/* <div className={classes.modalFooter}>{buttons}</div> */}
           </div>
         </div>
       )}

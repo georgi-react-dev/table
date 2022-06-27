@@ -21,6 +21,7 @@ const userSchema = mongoose.Schema({
         catchPhrase: String,
         bs: String
     },
+    id:Number
 })
 
 module.exports = mongoose.model('User', userSchema)
