@@ -57,6 +57,7 @@ function Users() {
               </button>
             </>
           }
+          closeModal={() => setShow(false)}
         >
           <AddUserForm modalClose={() => {setShow(false);setRefresh(true)}}/>
         </GenericModal>
