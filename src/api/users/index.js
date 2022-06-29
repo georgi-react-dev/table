@@ -1,7 +1,7 @@
 export async function fetchUsers() {
   const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL_PRODUCTION}/users`);
   const res = await results.json();
-  console.log("USERS", res.data);
+  console.log("USERS", process.env);
   return res.data;
 };
 
