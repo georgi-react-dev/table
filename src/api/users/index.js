@@ -1,5 +1,5 @@
 export async function fetchUsers() {
-  const results = await fetch(`${process.env.MODE === 'production' ? process.env.REACT_APP_API_URL_PRODUCTION : process.env.REACT_APP_API_URL_DEV }/users`);
+  const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL_PRODUCTION}/users`);
   const res = await results.json();
   console.log("USERS", res.data);
   return res.data;
@@ -15,7 +15,7 @@ export async function fetchUser(id) {
 
   console.log("ID", id);
 
-  const results = await fetch(`${process.env.MODE === 'production' ? process.env.REACT_APP_API_URL_PRODUCTION : process.env.REACT_APP_API_URL_DEV }/users/${id}`);
+  const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL_PRODUCTION}/users/${id}`);
   const data = await results.json();
   console.log("USER test fetch", data);
   return data;
@@ -24,7 +24,7 @@ export async function addUser(user) {
 
   console.log("USER", user)
 
-  const results = await fetch(`${process.env.MODE === 'production' ? process.env.REACT_APP_API_URL_PRODUCTION : process.env.REACT_APP_API_URL_DEV }/users/save`,{
+  const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL_PRODUCTION}/users/save`,{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -41,7 +41,7 @@ export async function removeUser(userId) {
 
   console.log("USER", userId)
 
-  const results = await fetch(`${process.env.MODE === 'production' ? process.env.REACT_APP_API_URL_PRODUCTION : process.env.REACT_APP_API_URL_DEV }/users/${userId}`,{
+  const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : process.env.REACT_APP_API_URL_PRODUCTION}/users/${userId}`,{
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
