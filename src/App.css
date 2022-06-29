@@ -96,6 +96,7 @@ td a:hover {
 
 .btn {
   display: inline-block;
+  cursor: pointer;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -123,4 +124,10 @@ td a:hover {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #f44545;
+  border-color: #f44545;
 }

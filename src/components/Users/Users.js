@@ -4,6 +4,7 @@ import useUsers from "../../hooks/useUsers";
 import { transformUsers } from "../../api/users/helper";
 import GenericModal from "../Modal/GenericModal";
 import AddUserForm from "./Forms/AddUserForm/AddUserForm";
+import {removeUser} from "../../api/users";
 
 function Users() {
   const [show, setShow] = useState(false);
@@ -32,10 +33,12 @@ function Users() {
   const { users, setRefresh } = useUsers();
 
   const addNewUser = () => {
-    // alert("NEW USER ADDED");
     setShow(true);
   };
-
+  const removeUserById = (id) => {
+   removeUser(id)
+   setRefresh(true);
+  }
   return (
     <section>
       {show && (
@@ -64,9 +67,11 @@ function Users() {
       )}
       <GenericTable
         tableName={`Users`}
+        onClick={() => console.log("clicked")}
         theadColumns={theadColumns}
         tbodyProps={transformUsers(users)}
         tbodyPropsFields={tbodyPropsFields}
+        onRemove={removeUserById}
       >
         <div className="filter-and-pagination has-filter">
           <button className="btn btn-primary" onClick={addNewUser}>
