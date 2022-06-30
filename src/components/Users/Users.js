@@ -50,7 +50,6 @@ function Users() {
   };
 
   const onAccept = () => {
-    alert("CLICKED");
     setShouldSaveUser(true);
   };
 
