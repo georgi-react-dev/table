@@ -62,24 +62,12 @@ function Posts({ userId }) {
               title={data.title}
               body={data.body}
               data={data}
-              closeModal={() => setShow(false)}
-              buttons={
-                <>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                    onClick={() => setShow(false)}
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
-                  </button>
-                </>
-              }
+              onReject={() => setShow(false)}
             >
-              <Comments data={postComments} />
+              <>
+                {data.body}
+                <Comments data={postComments} />
+              </>
             </GenericModal>
           )}
 

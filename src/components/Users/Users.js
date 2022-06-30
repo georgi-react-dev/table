@@ -4,10 +4,13 @@ import useUsers from "../../hooks/useUsers";
 import { transformUsers } from "../../api/users/helper";
 import GenericModal from "../Modal/GenericModal";
 import AddUserForm from "./Forms/AddUserForm/AddUserForm";
-import {removeUser} from "../../api/users";
+import { removeUser } from "../../api/users";
 
 function Users() {
   const [show, setShow] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [userIdForDeleting, setUserIdForDeleting] = useState(false);
+  const [shouldSaveUser, setShouldSaveUser] = useState(false);
   // "name": "Leanne Graham",
   // "username": "Bret",
   // "email": "Sincere@april.biz",
@@ -36,35 +39,50 @@ function Users() {
     setShow(true);
   };
   const removeUserById = (id) => {
-   removeUser(id)
-   setRefresh(true);
-  }
+    setUserIdForDeleting(id);
+    setShowConfirm(true);
+  };
+
+  const onConfirm = () => {
+    removeUser(userIdForDeleting);
+    setShowConfirm(false);
+    setRefresh(true);
+  };
+
+  const onAccept = () => {
+    alert("CLICKED");
+    setShouldSaveUser(true);
+  };
+
   return (
     <section>
       {show && (
         <GenericModal
-          show={show}
           title="ADD USER"
-          buttons={
+          onAccept={onAccept}
+          renderButtons={(onAccept, onReject) => (
             <>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-                onClick={() => setShow(false)}
-              >
+              <button className="btn btn-default" onClick={onReject}>
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" onClick={onAccept}>
                 Save
               </button>
             </>
-          }
-          closeModal={() => setShow(false)}
+          )}
+          onReject={() => setShow(false)}
         >
-          <AddUserForm modalClose={() => {setShow(false);setRefresh(true)}}/>
+          <AddUserForm
+            modalClose={() => {
+              setShow(false);
+              setRefresh(true);
+              setShouldSaveUser(false);
+            }}
+            shouldSaveUser={shouldSaveUser}
+          />
         </GenericModal>
       )}
+
       <GenericTable
         tableName={`Users`}
         onClick={() => console.log("clicked")}
@@ -87,6 +105,26 @@ function Users() {
           <div>Total: {users.length}</div>
         </div>
       </GenericTable>
+
+      {showConfirm && (
+        <GenericModal
+          title="Delete user"
+          onAccept={onConfirm}
+          renderButtons={(onAccept, onReject) => (
+            <>
+              <button className="btn btn-default" onClick={onReject}>
+                No
+              </button>
+              <button className="btn btn-primary" onClick={onAccept}>
+                Yes
+              </button>
+            </>
+          )}
+          onReject={() => setShowConfirm(false)}
+        >
+          Are you sure, you want to delete this user ? 
+        </GenericModal>
+      )}
     </section>
   );
 }

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import { addUser } from "../../../../api/users";
 import classes from "./AddUserForm.module.css";
 
-function AddUserForm({modalClose}) {
+function AddUserForm({modalClose,shouldSaveUser}) {
   const [user, setUser] = useState({
     name: "",
     username: "",
@@ -26,12 +26,20 @@ function AddUserForm({modalClose}) {
     
   };
 
-  const saveUser = async(e) => {
-    e.preventDefault();
+  const saveUser = useCallback(async() => {
     const res = await addUser(user);
     console.log("res", res)
     modalClose();
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[modalClose])
+
+  useEffect(() => {
+    if(shouldSaveUser) {
+      saveUser();
+    }
+  }, [saveUser,shouldSaveUser])
+  
+ 
 
   return (
     <div>
@@ -106,10 +114,6 @@ function AddUserForm({modalClose}) {
               onChange={handleChange}
             ></input>
           </label>
-        </div>
-        <div className={classes.formButtons}>
-          {" "}
-          <button className="btn btn-primary" onClick={saveUser}>Save</button>
         </div>
       </form>
     </div>
