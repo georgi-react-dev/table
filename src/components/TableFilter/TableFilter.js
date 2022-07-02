@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function TableFilter({ items, label, selectItem }) {
-  const [selectedOption, setSelectedOption] = useState(items[0].id);
+  const [selectedOption, setSelectedOption] = useState(items[0]?.id || '');
   //console.log("ITEMS", items);
   return (
     <div>

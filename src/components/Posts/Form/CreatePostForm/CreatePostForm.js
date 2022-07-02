@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { addPost } from "../../../../api/posts";
 // import classes from "./AddUserForm.module.css";
-
+import TableFilter from "../../../TableFilter/TableFilter";
+import useUsers from "../../../../hooks/useUsers";
 function CreatePostForm({ userId, modalClose, shouldSavePost }) {
   const [post, setPost] = useState({
     title: "",
     body: "",
     author: userId,
   });
+
+  const {users} = useUsers();
+
   const handleChange = (e) => {
     if (e.target.name === "company") {
       setPost((oldValues) => ({
@@ -37,6 +41,13 @@ function CreatePostForm({ userId, modalClose, shouldSavePost }) {
         savePost();
     }
   }, [savePost, shouldSavePost]);
+
+  const onSelectItem = (_id) => {
+    setPost((oldValues) => ({
+        ...oldValues,
+        'author': _id,
+    }));
+  }
 
   return (
     <div>
@@ -81,6 +92,12 @@ function CreatePostForm({ userId, modalClose, shouldSavePost }) {
               onChange={handleChange}
             ></textarea>
           </label>
+          
+            {!userId && <TableFilter
+                items={users}
+                label="Author:"
+                selectItem={onSelectItem}
+            />}
         </div>
       </form>
     </div>

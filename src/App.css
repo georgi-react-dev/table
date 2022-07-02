@@ -62,10 +62,10 @@
   margin-bottom: 20px;
 }
 .filter-select {
-  border: none;
+  
   padding: 5px;
   border-radius: 10px;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 .navigation ul {
   display: flex;
