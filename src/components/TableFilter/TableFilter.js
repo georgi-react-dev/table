@@ -15,7 +15,7 @@ function TableFilter({ items, label, selectItem }) {
       >
         {items.length &&
           items.map((item) => {
-            return <option key={item.id} value={item.id}>{item.name}</option>;
+            return <option key={item._id} value={item._id}>{item.name}</option>;
           })}
       </select>
     </div>

@@ -8,7 +8,7 @@ import UserPosts from "../../../components/Users/UserPosts";
 function SingleUser() {
   let params = useParams();
   const [user, setUser] = useState();
- // console.log("params", params.userId);
+ console.log("params", params);
   const [userImage, setUserImage] = useState()
   useEffect(() => {
     const getUser = async () => {
