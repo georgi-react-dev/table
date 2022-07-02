@@ -10,7 +10,7 @@ const Modal = ({ id, show, closeModal, children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetchPostById(id);
-      console.log(res);
+      // console.log(res);
       setPost(res);
 
       const comments = await fetchCommentsByPostId(id);

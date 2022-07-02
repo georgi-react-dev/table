@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { fetchPosts, fetchPostsByUserId } from "../api/posts";
 function usePosts(userId) {
   const [posts, setPosts] = useState([]);
-
+  const [refresh, setRefresh] = useState(false);
+  
   useEffect(() => {
     const getData = async() => {
       if(userId) {
@@ -11,10 +12,21 @@ function usePosts(userId) {
       }else{
         setPosts(await fetchPosts());
       }
-        
+      setRefresh(false)
       }
      getData();
-  }, [userId]);
+  }, [refresh,userId]);
+
+  // useEffect(() => {
+  //    (async() => {
+  //     if(userId) {
+  //       setPosts(await fetchPosts());
+  //     }
+        
+       
+  //     })();
+    
+  // }, [refresh,userId]);
 
   const getPostsByUserId = async(id) => {
     if(id) {
@@ -23,7 +35,7 @@ function usePosts(userId) {
    
   }
 
-  return {posts,setPosts, getPostsByUserId};
+  return {posts,setPosts, getPostsByUserId, setRefresh};
 }
 
 export default usePosts;

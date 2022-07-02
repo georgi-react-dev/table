@@ -18,17 +18,20 @@ function GenericTable({
       {children}
       <table border="1" className="posts">
         <thead>
-          <tr>
+          {/* <tr>
             {theadColumns?.map((theadColumn) => (
+              
+              <>{JSON.stringify(theadColumn)}
               <td key={theadColumn}>{theadColumn}</td>
+              </>
             ))}
             <td>Actions</td>
-          </tr>
+          </tr> */}
         </thead>
         <tbody>
           {tbodyProps &&
             tbodyProps?.map((tbodyProp, index) => {
-              console.log("tbodyProps", tbodyProp);
+              // console.log("tbodyProps", tbodyProp?.id);
               return (
                 <tr key={tbodyProp?.id} onClick={() => onClick(tbodyProp?.id)}>
                   {tbodyPropsFields?.map((tbodyPropsField) => {
