@@ -47,7 +47,8 @@ function Posts({ userId }) {
   }, [postId]);
 
   const onSelectItem = (id) => {
-    getPostsByUserId(id);
+    if(!id) setRefresh(true);
+    else getPostsByUserId(id);
   };
   const onClick = async (postId) => {
     setPostId(postId);
@@ -62,77 +63,73 @@ function Posts({ userId }) {
 
   return (
     <>
-      {posts.length ? (
-        <section>
-          {show && (
-            <GenericModal
-              show={show}
-              title={data.title}
-              body={data.body}
-              data={data}
-              onReject={() => setShow(false)}
-            >
+      <section>
+        {show && (
+          <GenericModal
+            show={show}
+            title={data.title}
+            body={data.body}
+            data={data}
+            onReject={() => setShow(false)}
+          >
+            <>
+              {data.body}
+              <Comments data={postComments} />
+            </>
+          </GenericModal>
+        )}
+        {showCreatePostModal && (
+          <GenericModal
+            title="Create post"
+            body={data.body}
+            data={data}
+            onReject={() => setShowCreatePostModal(false)}
+            renderButtons={(onAccept, onReject) => (
               <>
-                {data.body}
-                <Comments data={postComments} />
+                <button className="btn btn-default" onClick={onReject}>
+                  Close
+                </button>
+                <button className="btn btn-primary" onClick={() => setShouldSavePost(true)}>
+                  Create
+                </button>
               </>
-            </GenericModal>
-          )}
-          {showCreatePostModal && (
-            <GenericModal
-              title="Create post"
-              body={data.body}
-              data={data}
-              onReject={() => setShowCreatePostModal(false)}
-              renderButtons={(onAccept, onReject) => (
-                <>
-                  <button className="btn btn-default" onClick={onReject}>
-                    Close
-                  </button>
-                  <button className="btn btn-primary" onClick={() => setShouldSavePost(true)}>
-                    Create
-                  </button>
-                </>
+            )}
+          >
+            <>
+            <CreatePostForm userId={params.userId} modalClose={() => {
+            setShowCreatePostModal(false);
+            setRefresh(true);
+            setShouldSavePost(false);
+          }} shouldSavePost={shouldSavePost}/>
+            </>
+          </GenericModal>
+        )}
+          <GenericTable
+            tableName={`Posts`}
+            theadColumns={theadColumns}
+            tbodyProps={posts ? transformPosts(posts) : []}
+            tbodyPropsFields={tbodyPropsFields}
+            onClick={onClick}
+          >
+            <div
+              className={`filter-and-pagination ${
+                !userId || Object.keys(params)[0] === 'userId' ? "has-filter" : null
+              }`}
+            >
+              <button className="btn btn-primary" onClick={() => setShowCreatePostModal(true)}>
+                Create post
+              </button>
+              {users.length && !userId && (
+                <TableFilter
+                  items={users}
+                  label="Users"
+                  selectItem={onSelectItem}
+                />
               )}
-            >
-              <>
-              <CreatePostForm userId={params.userId} modalClose={() => {
-              setShowCreatePostModal(false);
-              setRefresh(true);
-              setShouldSavePost(false);
-            }} shouldSavePost={shouldSavePost}/>
-              </>
-            </GenericModal>
-          )}
-          {posts.length && users.length && (
-            <GenericTable
-              tableName={`Posts`}
-              theadColumns={theadColumns}
-              tbodyProps={transformPosts(posts)}
-              tbodyPropsFields={tbodyPropsFields}
-              onClick={onClick}
-            >
-              <div
-                className={`filter-and-pagination ${
-                  !userId || Object.keys(params)[0] === 'userId' ? "has-filter" : null
-                }`}
-              >
-                <button className="btn btn-primary" onClick={() => setShowCreatePostModal(true)}>
-            Create post
-          </button>
-                {users.length && !userId && (
-                  <TableFilter
-                    items={users}
-                    label="Users"
-                    selectItem={onSelectItem}
-                  />
-                )}
-                <div>Total: {posts.length}</div>
-              </div>
-            </GenericTable>
-          )}
-        </section>
-      ) : null}
+              <div>Total: {posts.length}</div>
+            </div>
+          </GenericTable>
+      </section>
     </>
   );
 }
