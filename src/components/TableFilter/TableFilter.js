@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function TableFilter({ items, label, selectItem }) {
-  const [selectedOption, setSelectedOption] = useState(items[0]?.id || '');
+  const [selectedOption, setSelectedOption] = useState('all');
   //console.log("ITEMS", items);
   return (
     <div>
@@ -13,6 +13,7 @@ function TableFilter({ items, label, selectItem }) {
             setSelectedOption(e.target.value)
         }}
       >
+        <option key='all' value=''>All</option>;
         {items.length &&
           items.map((item) => {
             return <option key={item._id} value={item._id}>{item.name}</option>;
