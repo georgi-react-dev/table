@@ -5,7 +5,7 @@ import TableFilter from "../../components/TableFilter/TableFilter";
 import GenericTable from "../../components/GenericTable.js/GenericTable";
 import { transformPosts } from "../../api/posts/helper";
 import { fetchPostById, fetchCommentsByPostId } from "../../api/posts";
-import Comments from "../Comments/Comments";
+import Comments from "../Comments/Comments.tsx";
 import GenericModal from "../Modal/GenericModal";
 import { useParams } from "react-router-dom";
 import CreatePostForm from "./Form/CreatePostForm/CreatePostForm";
@@ -35,8 +35,8 @@ function Posts({ userId }) {
       if (postId) {
         const post = await fetchPostById(postId);
         setData(post);
-
-        const comments = await fetchCommentsByPostId(postId);
+        
+        const comments = post.comments;
         console.log(comments);
         // setPost(comments);
         setPostComments(comments);
@@ -81,7 +81,7 @@ function Posts({ userId }) {
           >
             <>
               {data.body}
-              <Comments data={postComments} />
+              <Comments comments={postComments} />
             </>
           </GenericModal>
         )}
