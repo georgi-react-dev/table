@@ -53,3 +53,20 @@ export async function addPost(post) {
   console.log("Create post", data);
   return data;
 }
+
+export async function addCommentToPost(postId, comment) {
+
+  console.log("POST ID", postId )
+
+  const results = await fetch(`${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : 'https://table-nodejs-api.herokuapp.com/api'}/posts/${postId}/comment/save`,{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({comment:comment})
+  });
+  const data = await results.json();
+  console.log("Create post", data);
+  return data;
+}

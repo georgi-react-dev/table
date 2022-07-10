@@ -9,6 +9,7 @@ function GenericTable({
   onClick,
   actions,
   onRemove,
+  onEdit,
 }) {
   // console.log("theadColumns", theadColumns);
   // console.log("tbodyProps", tbodyProps);
@@ -62,6 +63,11 @@ function GenericTable({
                       <button
                         style={{ width: "100%" }}
                         className="btn btn-primary"
+                        onClick={(e) => {
+                          onEdit(tbodyProp?._id);
+                          e.stopPropagation();
+                        }
+                      }
                       >
                         edit
                       </button>
