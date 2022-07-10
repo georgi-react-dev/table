@@ -9,6 +9,7 @@ import Comments from "../Comments/Comments";
 import GenericModal from "../Modal/GenericModal";
 import { useParams } from "react-router-dom";
 import CreatePostForm from "./Form/CreatePostForm/CreatePostForm";
+import { addCommentToPost } from "../../api/posts";
 
 function Posts({ userId }) {
   const { posts, getPostsByUserId, setRefresh } = usePosts(userId);
@@ -57,7 +58,13 @@ function Posts({ userId }) {
   if (!posts) {
     return <h1>Loading ...</h1>;
   }
-
+  const saveComment = (postId) => {
+    addCommentToPost(postId, {
+      body:'test',
+      name:'test',
+      email:'test@gmail.com'
+    })
+  }
   const theadColumns = ["Title", "Author", "Description"];
   const tbodyPropsFields = ["title", "link", "body"];
 
@@ -110,6 +117,7 @@ function Posts({ userId }) {
             tbodyProps={posts ? transformPosts(posts) : []}
             tbodyPropsFields={tbodyPropsFields}
             onClick={onClick}
+            onEdit={saveComment}
           >
             <div
               className={`filter-and-pagination ${
