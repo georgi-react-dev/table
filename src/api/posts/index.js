@@ -19,13 +19,13 @@ export async function fetchPostsByUserId(userId) {
   return data.data;
 }
 
-export async function fetchPostById(id) {
+export async function fetchPostById(postId) {
   const results = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`
+    `${process.env.REACT_APP_MODE ?  process.env.REACT_APP_API_URL_DEV : 'https://table-nodejs-api.herokuapp.com/api'}/posts/${postId}`
   );
   const data = await results.json();
   console.log("POST BY ID", data);
-  return data;
+  return data.data;
 }
 
 export async function fetchCommentsByPostId(id) {
