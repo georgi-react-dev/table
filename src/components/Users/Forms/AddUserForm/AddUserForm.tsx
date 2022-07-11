@@ -2,8 +2,13 @@ import React, { useState,useEffect,useCallback } from "react";
 import { addUser } from "../../../../api/users";
 import classes from "./AddUserForm.module.css";
 
-function AddUserForm({modalClose,shouldSaveUser}) {
-  const [user, setUser] = useState({
+interface Props {
+  modalClose: () => void,
+  shouldSaveUser: boolean
+}
+
+const AddUserForm:React.FC<Props> = ({modalClose,shouldSaveUser}) => {
+  const [user, setUser] = useState<IUser>({
     name: "",
     username: "",
     email: "",
@@ -11,7 +16,7 @@ function AddUserForm({modalClose,shouldSaveUser}) {
       name:''
     }
   });
-  const handleChange = (e) => {
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.name === 'company') {
       setUser((oldValues) => ({
         ...oldValues,
