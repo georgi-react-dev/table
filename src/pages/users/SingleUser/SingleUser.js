@@ -3,7 +3,7 @@ import { Routes, Route, useParams } from "react-router-dom";
 import { fetchUser } from "../../../api/users";
 import classes from "./SingleUser.module.css";
 import { FaPhone, FaEnvelope, FaLocationArrow } from "react-icons/fa";
-import UserPosts from "../../../components/Users/UserPosts";
+import UserPosts from "../../../components/Users/UserPosts.tsx";
 
 function SingleUser() {
   let params = useParams();
