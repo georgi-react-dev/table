@@ -7,10 +7,10 @@ import AddUserForm from "./Forms/AddUserForm/AddUserForm";
 import { removeUser } from "../../api/users";
 
 function Users() {
-  const [show, setShow] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [userIdForDeleting, setUserIdForDeleting] = useState(false);
-  const [shouldSaveUser, setShouldSaveUser] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [userIdForDeleting, setUserIdForDeleting] = useState<number|null>(null);
+  const [shouldSaveUser, setShouldSaveUser] = useState<boolean>(false);
   // "name": "Leanne Graham",
   // "username": "Bret",
   // "email": "Sincere@april.biz",
@@ -31,14 +31,14 @@ function Users() {
   // "catchPhrase": "Multi-layered client-server neural-net",
   // "bs": "harness real-time e-markets"
   // }
-  const theadColumns = ["Name", "Username", "Email", "Company"];
+  const theadColumns = ["Name", "Username", "Email", "Company", "Actions"];
   const tbodyPropsFields = ["link", "username", "email", "companyName"];
   const { users, setRefresh } = useUsers();
 
   const addNewUser = () => {
     setShow(true);
   };
-  const removeUserById = (id) => {
+  const removeUserById = (id:number) => {
     setUserIdForDeleting(id);
     setShowConfirm(true);
   };
@@ -89,6 +89,7 @@ function Users() {
         tbodyProps={transformUsers(users)}
         tbodyPropsFields={tbodyPropsFields}
         onRemove={removeUserById}
+        onEdit={() => {}}
       >
         <div className="filter-and-pagination has-filter">
           <button className="btn btn-primary" onClick={addNewUser}>

@@ -3,8 +3,15 @@ import { addPost } from "../../../../api/posts";
 // import classes from "./AddUserForm.module.css";
 import TableFilter from "../../../TableFilter/TableFilter";
 import useUsers from "../../../../hooks/useUsers";
-function CreatePostForm({ userId, modalClose, shouldSavePost }) {
-  const [post, setPost] = useState({
+
+interface Props {
+  userId: string,
+  modalClose: () => {},
+  shouldSavePost: boolean
+}
+
+const CreatePostForm:React.FC<Props> = ({ userId, modalClose, shouldSavePost }) => {
+  const [post, setPost] = useState<IPost>({
     title: "",
     body: "",
     author: userId,
@@ -42,7 +49,7 @@ function CreatePostForm({ userId, modalClose, shouldSavePost }) {
     }
   }, [savePost, shouldSavePost]);
 
-  const onSelectItem = (_id) => {
+  const onSelectItem = (_id:string) => {
     setPost((oldValues) => ({
         ...oldValues,
         'author': _id,
@@ -86,7 +93,6 @@ function CreatePostForm({ userId, modalClose, shouldSavePost }) {
             {" "}
             Description:
             <textarea
-              type="text"
               name="body"
               value={post.body}
               onChange={handleChange}

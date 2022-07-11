@@ -1,11 +1,6 @@
-import logo from "./logo.svg";
-import usePosts from "./hooks/usePosts";
-import useUsers from "./hooks/useUsers";
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
-
 import SingleUser from "./pages/users/SingleUser/SingleUser";
-// import Posts from "./pages/posts/index";
 import Users from "./pages/users";
 import Posts from "./pages/posts";
 
@@ -14,7 +9,7 @@ function App() {
   return (
     <main className="App">
       <header className="App-header">
-        <h2>REACT EXAMPLE APP</h2>
+        <h2>MERN</h2>
         
         <nav className="navigation">
           <ul>

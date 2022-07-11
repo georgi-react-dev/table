@@ -4,7 +4,7 @@ import useUsers from "../../hooks/useUsers";
 import TableFilter from "../../components/TableFilter/TableFilter";
 import GenericTable from "../../components/GenericTable.js/GenericTable";
 import { transformPosts } from "../../api/posts/helper";
-import { fetchPostById, fetchCommentsByPostId } from "../../api/posts";
+import { fetchPostById } from "../../api/posts";
 import Comments from "../Comments/Comments.tsx";
 import GenericModal from "../Modal/GenericModal";
 import { useParams } from "react-router-dom";
@@ -65,7 +65,7 @@ function Posts({ userId }) {
       email:'test@gmail.com'
     })
   }
-  const theadColumns = ["Title", "Author", "Description"];
+  const theadColumns = ["Title", "Author", "Description", "Actions"];
   const tbodyPropsFields = ["title", "link", "body"];
 
   return (
