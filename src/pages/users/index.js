@@ -1,5 +1,5 @@
 import React from "react";
-import Users from "../../components/Users/Users";
+import Users from "../../components/Users/Users.tsx";
 
 function index() {
   return (

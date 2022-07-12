@@ -3,7 +3,7 @@ import { addPost } from "../../../../api/posts";
 // import classes from "./AddUserForm.module.css";
 import TableFilter from "../../../TableFilter/TableFilter";
 import useUsers from "../../../../hooks/useUsers";
-
+import {IPost} from '../../../../../types'
 interface Props {
   userId: string,
   modalClose: () => {},
@@ -19,7 +19,7 @@ const CreatePostForm:React.FC<Props> = ({ userId, modalClose, shouldSavePost }) 
 
   const {users} = useUsers();
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     if (e.target.name === "company") {
       setPost((oldValues) => ({
         ...oldValues,

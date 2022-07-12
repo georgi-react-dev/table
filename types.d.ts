@@ -1,18 +1,18 @@
 
-
-interface IComment {
+export {};
+export interface IComment {
     id: number,
     name: string,
     body: string,
     email: string
 }
 
-interface IFilterItem {
+export interface IFilterItem {
     _id:number,
     name:string
 }
 
-interface IUser {
+export interface IUser {
     name: string,
     username: string,
     email: string,
@@ -21,7 +21,7 @@ interface IUser {
     }
 }
 
-interface IPost {
+export interface IPost {
     title: string,
     body: string,
     author: string,

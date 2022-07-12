@@ -1,23 +1,32 @@
 import React, { Key, useState } from "react";
-import classes from "./Comments.module.css";
+// import classes from "./Comments.module.css";
 import LeaveCommentForm from "../LeaveCommentForm/LeaveCommentForm";
 import { IComment } from "../../../types";
 
 interface IProps {
-  comments: IComment[]
+  comments: IComment[];
 }
 
 const Comments: React.FC<IProps> = (props) => {
   console.log("DATATTATATA", props);
 
-  const [showForm, setShowForm] = useState<boolean>(false)
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   return (
     <>
-      <h3 style={{marginTop:'2rem'}}>Comments: </h3>
-      <div className={classes.commentsWrapper}>
-        {props.comments.map((comment:IComment) => {
-          const {id, name, body, email} = comment;
+      <h3 style={{ marginTop: "2rem" }}>Comments: </h3>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(1, 1fr)",
+          marginTop: "1rem",
+          gridGap: "1rem",
+          overflow: "auto",
+          height: "calc(100vh - 25rem)",
+        }}
+      >
+        {props.comments.map((comment: IComment) => {
+          const { id, name, body, email } = comment;
           console.log(typeof id);
 
           return (
@@ -37,14 +46,17 @@ const Comments: React.FC<IProps> = (props) => {
             </div>
           );
         })}
-
-        
-
       </div>
-      <button className="btn btn-primary" style={{marginTop:'2rem'}} onClick={() => setShowForm(true)}>Leave comment</button>
-      {showForm && <LeaveCommentForm/>}
+      <button
+        className="btn btn-primary"
+        style={{ marginTop: "2rem" }}
+        onClick={() => setShowForm(true)}
+      >
+        Leave comment
+      </button>
+      {showForm && <LeaveCommentForm />}
     </>
   );
-}
+};
 
 export default Comments;
