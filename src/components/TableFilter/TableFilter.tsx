@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-
+import { IFilterItem } from '../../../types'
 interface Props {
   items: IFilterItem[],
   label: string,

@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useCallback } from "react";
 import { addUser } from "../../../../api/users";
-import classes from "./AddUserForm.module.css";
-
+// import classes from "./AddUserForm.module.css";
+import { IUser } from '../../../../../types'
 interface Props {
   modalClose: () => void,
   shouldSaveUser: boolean
